@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>考研完全指南</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f0f2f5;
+    color: #333;
+    line-height: 1.7;
+  }
+
+  /* 顶部导航 */
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.15);
+  }
+  .navbar .logo {
+    font-size: 20px;
+    font-weight: 700;
+    color: #e94560;
+    margin-right: 40px;
+  }
+  .navbar a {
+    color: #ccc;
+    text-decoration: none;
+    margin-right: 28px;
+    font-size: 14px;
+    transition: color .2s;
+  }
+  .navbar a:hover, .navbar a.active { color: #fff; }
+
+  /* 主布局 */
+  .container {
+    max-width: 1100px;
+    margin: 24px auto;
+    padding: 0 16px;
+    display: flex;
+    gap: 24px;
+  }
+  main { flex: 1; min-width: 0; }
+  aside { width: 280px; flex-shrink: 0; }
+
+  /* 卡片 */
+  .card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 28px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  }
+  .card h2 {
+    font-size: 20px;
+    margin-bottom: 16px;
+    padding-left: 12px;
+    border-left: 4px solid #e94560;
+  }
+  .card h3 {
+    font-size: 16px;
+    margin: 16px 0 8px;
+    color: #1a1a2e;
+  }
+  .card p { margin-bottom: 10px; color: #555; }
+  .card a, footer a { color: #e94560; text-decoration: none; }
+  .card a:hover, footer a:hover { text-decoration: underline; }
+
+  /* 时间线 */
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 4px;
+    bottom: 4px;
+    width: 2px;
+    background: #e0e0e0;
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+    padding-left: 20px;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -22px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #e94560;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px #e94560;
+  }
+  .timeline-item .month {
+    font-weight: 700;
+    color: #e94560;
+    font-size: 14px;
+  }
+  .timeline-item .desc {
+    color: #555;
+    font-size: 14px;
+    margin-top: 2px;
+  }
+
+  /* 科目卡片 */
+  .subject-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .subject-card {
+    border: 1px solid #e8e8e8;
+    border-radius: 8px;
+    padding: 16px;
+    transition: box-shadow .2s;
+  }
+  .subject-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,.08); }
+  .subject-card h4 {
+    font-size: 15px;
+    margin-bottom: 6px;
+    color: #1a1a2e;
+  }
+  .subject-card .score {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 6px;
+  }
+  .subject-card ul {
+    font-size: 13px;
+    color: #666;
+    padding-left: 18px;
+  }
+
+  /* 侧边栏 */
+  .sidebar-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.06);
+  }
+  .sidebar-card h3 {
+    font-size: 15px;
+    margin-bottom: 12px;
+    color: #1a1a2e;
+  }
+  .sidebar-card ul {
+    list-style: none;
+    font-size: 13px;
+  }
+  .sidebar-card ul li {
+    padding: 6px 0;
+    border-bottom: 1px solid #f5f5f5;
+    color: #666;
+  }
+  .sidebar-card ul li a {
+    color: #e94560;
+    text-decoration: none;
+  }
+  .sidebar-card ul li a:hover {
+    text-decoration: underline;
+  }
+  .sidebar-card ul li:last-child { border-bottom: none; }
+
+  .stat-number {
+    font-size: 28px;
+    font-weight: 700;
+    color: #e94560;
+  }
+  .stat-label { font-size: 12px; color: #999; }
+
+  .stats-row {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+  }
+
+  /* 按钮 */
+  .btn {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all .2s;
+  }
+  .btn-primary {
+    background: #e94560;
+    color: #fff;
+  }
+  .btn-primary:hover { background: #d63851; }
+
+  /* Tab */
+  .tabs {
+    display: flex;
+    border-bottom: 2px solid #f0f0f0;
+    margin-bottom: 16px;
+  }
+  .tab {
+    padding: 8px 18px;
+    font-size: 14px;
+    cursor: pointer;
+    color: #999;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all .2s;
+  }
+  .tab.active {
+    color: #e94560;
+    border-bottom-color: #e94560;
+  }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* 进度条 */
+  .progress-bar {
+    height: 8px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 8px 0;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #e94560, #ff6b6b);
+    border-radius: 4px;
+    transition: width .6s ease;
+  }
+
+  /* 倒计时 */
+  .countdown {
+    text-align: center;
+    padding: 16px;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    border-radius: 10px;
+    color: #fff;
+  }
+  .countdown .days {
+    font-size: 36px;
+    font-weight: 700;
+  }
+  .countdown .days-label {
+    font-size: 13px;
+    color: #aaa;
+  }
+
+  /* 响应式 */
+  @media (max-width: 768px) {
+    .container { flex-direction: column; }
+    aside { width: 100%; }
+    .subject-grid { grid-template-columns: 1fr; }
+    .navbar a { display: none; }
+  }
+
+  footer {
+    text-align: center;
+    padding: 24px;
+    color: #aaa;
+    font-size: 12px;
+  }
+
+  /* 模态框 */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.5);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s;
+  }
+  .modal-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .modal {
+    background: #fff;
+    border-radius: 12px;
+    width: 90vw;
+    max-width: 1000px;
+    max-height: 85vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 40px rgba(0,0,0,.2);
+  }
+  .modal-header {
+    padding: 18px 24px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .modal-header h3 { font-size: 18px; color: #1a1a2e; }
+  .modal-close {
+    width: 32px; height: 32px;
+    border: none; background: #f5f5f5;
+    border-radius: 50%; cursor: pointer;
+    font-size: 16px; line-height: 32px; text-align: center;
+    color: #666; transition: all .2s;
+  }
+  .modal-close:hover { background: #e94560; color: #fff; }
+  .modal-body {
+    padding: 20px 24px;
+    overflow-y: auto;
+    flex: 1;
+  }
+  .modal-tabs {
+    display: flex; gap: 8px;
+    margin-bottom: 16px; flex-wrap: wrap;
+  }
+  .modal-tab {
+    padding: 6px 18px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all .2s;
+  }
+  .modal-tab.active { background: #e94560; color: #fff; border-color: #e94560; }
+  .modal-tab:hover:not(.active) { border-color: #e94560; color: #e94560; }
+
+  .score-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .score-table th, .score-table td {
+    padding: 8px 10px;
+    border: 1px solid #eee;
+    text-align: center;
+  }
+  .score-table thead th {
+    background: #f8f8f8;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  .score-table tbody tr:hover { background: #fdf2f4; }
+  .score-table .school-name { text-align: left; font-weight: 500; }
+  .score-table .tag-985 { display: inline-block; padding: 1px 6px; border-radius: 3px; background: #fff3cd; color: #856404; font-size: 11px; margin-left: 4px; }
+  .score-table .tag-211 { display: inline-block; padding: 1px 6px; border-radius: 3px; background: #e8f4fd; color: #0c5460; font-size: 11px; margin-left: 4px; }
+  .score-table .tag-shuang { display: inline-block; padding: 1px 6px; border-radius: 3px; background: #f0f0f0; color: #555; font-size: 11px; margin-left: 4px; }
+
+  .section-title {
+    font-size: 15px; color: #e94560; font-weight: 700;
+    margin: 16px 0 8px; padding-left: 10px;
+    border-left: 3px solid #e94560;
+  }
+
+  .note { font-size: 12px; color: #999; margin-top: 12px; }
+
+  @media (max-width: 768px) {
+    .modal { width: 96vw; max-height: 90vh; }
+    .score-table { font-size: 11px; }
+    .score-table th, .score-table td { padding: 5px 4px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 导航 -->
+<nav class="navbar">
+  <div class="logo">考研完全指南</div>
+  <a href="#overview" class="active">概览</a>
+  <a href="#timeline">时间线</a>
+  <a href="#subjects">考试科目</a>
+  <a href="#prepare">备考策略</a>
+  <a href="#tips">经验建议</a>
+</nav>
+
+<div class="container">
+  <main>
+
+    <!-- 概览 -->
+    <section id="overview" class="card">
+      <h2>什么是考研</h2>
+      <p>全国硕士研究生统一招生考试（简称"考研"）是由教育部组织的选拔性考试，用于选拔硕士研究生。考研分为<strong>初试</strong>和<strong>复试</strong>两个阶段，初试为全国统一笔试，复试由各招生单位自行组织。</p>
+
+      <div class="stats-row" style="margin-top: 20px;">
+        <div>
+          <div class="stat-number">388万</div>
+          <div class="stat-label">2025年报名人数</div>
+        </div>
+        <div>
+          <div class="stat-number">约30%</div>
+          <div class="stat-label">平均录取率</div>
+        </div>
+        <div>
+          <div class="stat-number">500</div>
+          <div class="stat-label">初试总分</div>
+        </div>
+        <div>
+          <div class="stat-number">800+</div>
+          <div class="stat-label">招生单位</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 倒计时 -->
+    <div class="countdown" style="margin-bottom: 20px;">
+      <div class="days" id="countdown-days">--</div>
+      <div class="days-label">距离2027年考研初试还有</div>
+    </div>
+
+    <!-- 时间线 -->
+    <section id="timeline" class="card">
+      <h2>考研时间线</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="month">1月–3月 · 确定目标</div>
+          <div class="desc">确定报考专业和院校，了解目标院校的报录比、分数线、专业课要求。收集历年真题和参考书目。<br><button class="btn btn-primary" style="margin-top:8px;font-size:12px;padding:6px 16px;" onclick="openModal()">📊 查看近3年计算机考研分数线</button></div>
+        </div>
+        <div class="timeline-item">
+          <div class="month">3月–6月 · 一轮复习</div>
+          <div class="desc">英语和数学打基础阶段。英语主攻词汇和长难句，数学过完高数、线代、概率论教材。专业课通读参考书。</div>
+        </div>
+        <div class="timeline-item">
+          <div class="month">7月–8月 · 强化阶段</div>
+          <div class="desc">暑假是黄金备考期。英语开始刷真题阅读，数学进入刷题模式，政治开始第一轮学习，专业课整理笔记。</div>
+        </div>
+        <div class="timeline-item">
+          <div class="month">9月 · 报名与大纲</div>
+          <div class="desc">考研大纲发布，密切关注变化。9月下旬网上预报名开启。各院校发布招生简章和专业目录。</div>
+        </div>
+        <div class="timeline-item">
+          <div class="month">10月 · 正式报名</div>
+          <div class="desc">10月中上旬正式报名（每天9:00-22:00）。仔细核对报考信息，确认考点。报名截止后不可更改。</div>
+        </div>
+        <div class="timeline-item">
+          <div class="month">11月 · 现场确认</div>
+          <div class="desc">网上/现场确认报名信息，采集图像，核对个人信息。部分省市全程网上确认。</div>
+        </div>
+        <div class="timeline-item">
+          <div class="month">12月 · 冲刺 & 初试</div>
+          <div class="desc">考前冲刺：政治背诵、英语作文模板、数学错题回顾。12月下旬周末初试笔试（通常为倒数第二个周末）。</div>
+        </div>
+        <div class="timeline-item">
+          <div class="month">次年2月 · 出分</div>
+          <div class="desc">初试成绩陆续公布。对比往年分数线判断是否准备复试或调剂。</div>
+        </div>
+        <div class="timeline-item">
+          <div class="month">次年3月–4月 · 复试与调剂</div>
+          <div class="desc">国家线公布，各院校组织复试（笔试+面试）。未进复试或复试被刷的同学参加调剂。</div>
+        </div>
+        <div class="timeline-item">
+          <div class="month">次年5月–6月 · 录取</div>
+          <div class="desc">录取通知书陆续发放。调档、政审、体检等入学前准备工作。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 考试科目 -->
+    <section id="subjects" class="card">
+      <h2>初试科目详解</h2>
+      <p style="margin-bottom: 16px;">初试一般为4门科目，总分500分（部分专业如管理类联考为300分）。具体科目因专业而异：</p>
+      <div class="subject-grid">
+        <div class="subject-card">
+          <h4>政治</h4>
+          <div class="score">满分 100 分 | 全国统考</div>
+          <ul>
+            <li>马克思主义基本原理</li>
+            <li>毛泽东思想和中国特色社会主义理论体系</li>
+            <li>中国近现代史纲要</li>
+            <li>思想道德与法治</li>
+            <li>形势与政策及当代世界经济与政治</li>
+          </ul>
+        </div>
+        <div class="subject-card">
+          <h4>英语</h4>
+          <div class="score">满分 100 分 | 英语一 / 英语二</div>
+          <ul>
+            <li>完形填空（10分）</li>
+            <li>阅读理解（40分）</li>
+            <li>新题型（10分）</li>
+            <li>翻译（英一10分 / 英二15分）</li>
+            <li>写作：小作文+大作文</li>
+          </ul>
+        </div>
+        <div class="subject-card">
+          <h4>数学</h4>
+          <div class="score">满分 150 分 | 数一 / 数二 / 数三</div>
+          <ul>
+            <li>高等数学（微积分）</li>
+            <li>线性代数</li>
+            <li>概率论与数理统计（数二不考）</li>
+            <li>数一范围最广，数三偏经济应用</li>
+          </ul>
+        </div>
+        <div class="subject-card">
+          <h4>专业课</h4>
+          <div class="score">满分 150 分（或300分）</div>
+          <ul>
+            <li>统考专业课：408计算机、311教育学等</li>
+            <li>自命题专业课：由各院校自主出题</li>
+            <li>需到目标院校官网查询参考书目</li>
+            <li>历年真题是最重要的复习资料</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 备考策略 -->
+    <section id="prepare" class="card">
+      <h2>备考策略</h2>
+
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab('english')">英语</div>
+        <div class="tab" onclick="switchTab('math')">数学</div>
+        <div class="tab" onclick="switchTab('politics')">政治</div>
+        <div class="tab" onclick="switchTab('major')">专业课</div>
+      </div>
+
+      <div id="english" class="tab-content active">
+        <h3>英语备考方案</h3>
+        <p><strong>基础阶段（3-6月）：</strong>每天背诵50-100个单词，推荐使用《红宝书》或墨墨背单词APP。学习长难句分析，推荐田静老师课程。</p>
+        <p><strong>强化阶段（7-9月）：</strong>刷近20年真题阅读，每篇精读分析，总结题型规律。推荐唐迟老师阅读课。</p>
+        <p><strong>冲刺阶段（10-12月）：</strong>准备大小作文模板并进行仿写。完形、翻译、新题型专项训练。近3年真题全真模拟。</p>
+        <div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div>
+        <small style="color:#999">推荐资料：张剑黄皮书、考研真相、王江涛作文</small>
+      </div>
+
+      <div id="math" class="tab-content">
+        <h3>数学备考方案</h3>
+        <p><strong>基础阶段（3-6月）：</strong>过完高数、线代、概率论教材，做课后习题。推荐张宇30讲或汤家凤基础课。</p>
+        <p><strong>强化阶段（7-9月）：</strong>刷《660题》《880题》或《1000题》。建立错题本，总结题型套路。推荐武忠祥强化课。</p>
+        <p><strong>冲刺阶段（10-12月）：</strong>刷近15年真题（按套卷做），再做模拟卷（李林6+4、张宇8+4）。严格控制时间。</p>
+        <div class="progress-bar"><div class="progress-fill" style="width:75%"></div></div>
+        <small style="color:#999">推荐资料：李永乐复习全书、李林880题、历年真题</small>
+      </div>
+
+      <div id="politics" class="tab-content">
+        <h3>政治备考方案</h3>
+        <p><strong>基础阶段（7-9月）：</strong>配合徐涛强化课过肖秀荣《精讲精练》，每章做《1000题》对应练习。</p>
+        <p><strong>强化阶段（10-11月）：</strong>二刷《1000题》错题，背诵选择题考点。推荐腿姐《冲刺背诵手册》。</p>
+        <p><strong>冲刺阶段（12月）：</strong>背肖四分析题（重中之重），做肖八、腿四等模拟卷选择题。时政部分看各老师总结即可。</p>
+        <div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div>
+        <small style="color:#999">推荐资料：肖秀荣全家桶、徐涛核心考案、腿姐背诵手册</small>
+      </div>
+
+      <div id="major" class="tab-content">
+        <h3>专业课备考方案</h3>
+        <p><strong>信息收集（1-4月）：</strong>确定目标院校后，到研究生院官网查参考书目、考试大纲。在知乎、小红书、<a href="https://bbs.kaoyan.com" target="_blank" rel="noopener">考研论坛</a>找经验帖。</p>
+        <p><strong>系统复习（5-9月）：</strong>通读参考教材2-3遍，整理知识框架和笔记。搜集历年真题，分析考点分布和出题风格。</p>
+        <p><strong>冲刺背诵（10-12月）：</strong>反复背诵核心知识点，真题模拟练习。如果可能，联系目标院校学长学姐获取内部资料。</p>
+        <div class="progress-bar"><div class="progress-fill" style="width:70%"></div></div>
+        <small style="color:#999">核心：历年真题 > 参考书目 > 学长笔记 > 模拟题</small>
+      </div>
+    </section>
+
+    <!-- 经验建议 -->
+    <section id="tips" class="card">
+      <h2>过来人的建议</h2>
+
+      <h3>关于择校</h3>
+      <p>选择大于努力。综合考虑：学校层次、专业实力、地理位置、报录比、是否保护一志愿。建议选择比自己本科高1-2档的学校，既要有挑战性，也要确保有上岸可能。</p>
+
+      <h3>关于心态</h3>
+      <p>考研是一场马拉松，不是短跑。保持规律作息，每周休息半天到一天。不要和别人比进度，按自己的节奏走。焦虑是正常的，但不要让焦虑影响行动。</p>
+
+      <h3>关于效率</h3>
+      <p>每天有效学习时间6-8小时即可，关键在于坚持。手机是最大的敌人，建议学习时开专注模式或使用番茄钟。每周做计划，每天做复盘。</p>
+
+      <h3>常见误区</h3>
+      <ul style="padding-left: 20px; color: #555; margin-top: 8px;">
+        <li>盲目刷视频课，看课≠学会，做题才是检验标准</li>
+        <li>资料贪多嚼不烂，一本书做三遍胜过三本书做一遍</li>
+        <li>忽视真题，模拟题再好也不如真题的命题思路</li>
+        <li>只顾进度不顾质量，基础不牢后期会非常吃力</li>
+        <li>跟风选热门院校热门专业，不考虑自身实力匹配</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- 侧边栏 -->
+  <aside>
+    <div class="sidebar-card">
+      <h3>考研类型</h3>
+      <ul>
+        <li><strong>学硕</strong> — 学术型硕士，侧重理论研究，一般3年制</li>
+        <li><strong>专硕</strong> — 专业型硕士，侧重实践应用，一般2-3年制</li>
+        <li><strong>全日制</strong> — 脱产学习，提供住宿和奖学金</li>
+        <li><strong>非全日制</strong> — 在职攻读，周末或集中授课</li>
+      </ul>
+    </div>
+
+    <div class="sidebar-card">
+      <h3>国家线分区</h3>
+      <ul>
+        <li><strong>A区（一区）：</strong>北京、天津、上海、江苏、浙江等21省市，分数线较高</li>
+        <li><strong>B区（二区）：</strong>内蒙古、广西、海南、贵州、云南、西藏、甘肃、青海、宁夏、新疆10省区，分数线较低</li>
+      </ul>
+    </div>
+
+    <div class="sidebar-card">
+      <h3>常用网站</h3>
+      <ul style="line-height: 2;">
+        <li>🔗 <a href="https://yz.chsi.com.cn" target="_blank" rel="noopener">中国研究生招生信息网（研招网）</a></li>
+        <li>🔗 <a href="https://yz.chsi.com.cn/zsml/" target="_blank" rel="noopener">硕士专业目录查询</a></li>
+        <li>🔗 <a href="https://bbs.kaoyan.com" target="_blank" rel="noopener">考研论坛（bbs.kaoyan.com）</a></li>
+        <li>🔗 <a href="https://kaoyan.eol.cn" target="_blank" rel="noopener">中国教育在线考研频道</a></li>
+        <li>🔗 <a href="https://www.moe.gov.cn" target="_blank" rel="noopener">教育部官网</a></li>
+        <li>🔗 <a href="https://yz.chsi.com.cn/kyzx/" target="_blank" rel="noopener">研招网考研资讯</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-card">
+      <h3>关键分数线</h3>
+      <ul>
+        <li><strong>国家线：</strong>进入复试的最低要求，分学科门类划定</li>
+        <li><strong>院校线：</strong>34所自主划线高校自行划定，通常高于国家线</li>
+        <li><strong>专业线：</strong>各专业实际进入复试的最低分数</li>
+        <li><strong>单科线：</strong>各科目须达到的最低分数</li>
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<!-- 分数线弹窗 -->
+<div class="modal-overlay" id="scoreModal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>📊 近3年计算机相关专业考研分数线（一本及以上院校）</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <!-- 年份标签 -->
+      <div class="modal-tabs">
+        <button class="modal-tab active" onclick="switchYear('y2025', this)">2025年</button>
+        <button class="modal-tab" onclick="switchYear('y2024', this)">2024年</button>
+        <button class="modal-tab" onclick="switchYear('y2023', this)">2023年</button>
+      </div>
+
+      <!-- 年份内容区 -->
+      <div id="y2025" class="modal-year-content">
+        <div class="section-title">一、2025年国家线</div>
+        <table class="score-table">
+          <thead><tr><th>学科门类</th><th>类型</th><th>总分</th><th>政治/英语</th><th>数学/专业课</th></tr></thead>
+          <tbody>
+            <tr><td>工学（08）含计算机科学与技术0812</td><td>A区</td><td>260</td><td>34</td><td>51</td></tr>
+            <tr><td>工学（08）含计算机科学与技术0812</td><td>B区</td><td>250</td><td>31</td><td>47</td></tr>
+            <tr><td>理学（07）含计算机0775</td><td>A区</td><td>274</td><td>34</td><td>51</td></tr>
+            <tr><td>理学（07）含计算机0775</td><td>B区</td><td>264</td><td>31</td><td>47</td></tr>
+            <tr><td>电子信息（0854）专硕</td><td>A区</td><td>260</td><td>34</td><td>51</td></tr>
+            <tr><td>电子信息（0854）专硕</td><td>B区</td><td>250</td><td>31</td><td>47</td></tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">二、985院校 · 计算机科学与技术（学硕0812）/ 电子信息（专硕0854）复试分数线</div>
+        <table class="score-table">
+          <thead><tr><th>院校</th><th>类型</th><th>学硕复试线</th><th>专硕复试线</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td class="school-name">清华大学<span class="tag-985">985</span></td><td>自划线</td><td>355</td><td>350</td><td>实际院线更高</td></tr>
+            <tr><td class="school-name">北京大学<span class="tag-985">985</span></td><td>自划线</td><td>360</td><td>350</td><td>实际院线更高</td></tr>
+            <tr><td class="school-name">浙江大学<span class="tag-985">985</span></td><td>自划线</td><td>350</td><td>345</td><td></td></tr>
+            <tr><td class="school-name">上海交通大学<span class="tag-985">985</span></td><td>自划线</td><td>350</td><td>345</td><td></td></tr>
+            <tr><td class="school-name">复旦大学<span class="tag-985">985</span></td><td>自划线</td><td>345</td><td>340</td><td></td></tr>
+            <tr><td class="school-name">南京大学<span class="tag-985">985</span></td><td>自划线</td><td>345</td><td>340</td><td></td></tr>
+            <tr><td class="school-name">中国科学技术大学<span class="tag-985">985</span></td><td>自划线</td><td>345</td><td>340</td><td></td></tr>
+            <tr><td class="school-name">哈尔滨工业大学<span class="tag-985">985</span></td><td>自划线</td><td>335</td><td>330</td><td></td></tr>
+            <tr><td class="school-name">华中科技大学<span class="tag-985">985</span></td><td>自划线</td><td>340</td><td>335</td><td></td></tr>
+            <tr><td class="school-name">武汉大学<span class="tag-985">985</span></td><td>自划线</td><td>340</td><td>335</td><td></td></tr>
+            <tr><td class="school-name">北京航空航天大学<span class="tag-985">985</span></td><td>自划线</td><td>340</td><td>335</td><td></td></tr>
+            <tr><td class="school-name">北京理工大学<span class="tag-985">985</span></td><td>自划线</td><td>330</td><td>325</td><td></td></tr>
+            <tr><td class="school-name">电子科技大学<span class="tag-985">985</span></td><td>自划线</td><td>340</td><td>330</td><td>计算机强校</td></tr>
+            <tr><td class="school-name">西安交通大学<span class="tag-985">985</span></td><td>自划线</td><td>335</td><td>330</td><td></td></tr>
+            <tr><td class="school-name">同济大学<span class="tag-985">985</span></td><td>自划线</td><td>335</td><td>330</td><td></td></tr>
+            <tr><td class="school-name">东南大学<span class="tag-985">985</span></td><td>自划线</td><td>335</td><td>330</td><td></td></tr>
+            <tr><td class="school-name">天津大学<span class="tag-985">985</span></td><td>自划线</td><td>325</td><td>320</td><td></td></tr>
+            <tr><td class="school-name">南开大学<span class="tag-985">985</span></td><td>自划线</td><td>330</td><td>325</td><td></td></tr>
+            <tr><td class="school-name">中山大学<span class="tag-985">985</span></td><td>自划线</td><td>335</td><td>330</td><td></td></tr>
+            <tr><td class="school-name">华南理工大学<span class="tag-985">985</span></td><td>自划线</td><td>330</td><td>325</td><td></td></tr>
+            <tr><td class="school-name">厦门大学<span class="tag-985">985</span></td><td>自划线</td><td>330</td><td>325</td><td></td></tr>
+            <tr><td class="school-name">四川大学<span class="tag-985">985</span></td><td>自划线</td><td>330</td><td>320</td><td></td></tr>
+            <tr><td class="school-name">重庆大学<span class="tag-985">985</span></td><td>自划线</td><td>320</td><td>320</td><td></td></tr>
+            <tr><td class="school-name">湖南大学<span class="tag-985">985</span></td><td>自划线</td><td>325</td><td>320</td><td></td></tr>
+            <tr><td class="school-name">中南大学<span class="tag-985">985</span></td><td>自划线</td><td>325</td><td>320</td><td></td></tr>
+            <tr><td class="school-name">山东大学<span class="tag-985">985</span></td><td>自划线</td><td>325</td><td>320</td><td></td></tr>
+            <tr><td class="school-name">大连理工大学<span class="tag-985">985</span></td><td>自划线</td><td>325</td><td>320</td><td></td></tr>
+            <tr><td class="school-name">东北大学<span class="tag-985">985</span></td><td>自划线</td><td>320</td><td>315</td><td></td></tr>
+            <tr><td class="school-name">吉林大学<span class="tag-985">985</span></td><td>自划线</td><td>330</td><td>325</td><td></td></tr>
+            <tr><td class="school-name">兰州大学<span class="tag-985">985</span></td><td>自划线</td><td>310</td><td>305</td><td>B区高校</td></tr>
+            <tr><td class="school-name">西北工业大学<span class="tag-985">985</span></td><td>自划线</td><td>330</td><td>325</td><td>计算机强校</td></tr>
+            <tr><td class="school-name">国防科技大学<span class="tag-985">985</span></td><td>自划线</td><td>340</td><td>335</td><td>计算机A+</td></tr>
+            <tr><td class="school-name">华东师范大学<span class="tag-985">985</span></td><td>自划线</td><td>325</td><td>320</td><td></td></tr>
+            <tr><td class="school-name">北京师范大学<span class="tag-985">985</span></td><td>自划线</td><td>320</td><td>315</td><td></td></tr>
+            <tr><td class="school-name">中国农业大学<span class="tag-985">985</span></td><td>自划线</td><td>310</td><td>305</td><td></td></tr>
+            <tr><td class="school-name">西北农林科技大学<span class="tag-985">985</span></td><td>自划线</td><td>290</td><td>285</td><td></td></tr>
+            <tr><td class="school-name">中国人民大学<span class="tag-985">985</span></td><td>自划线</td><td>330</td><td>325</td><td>高瓴人工智能学院</td></tr>
+            <tr><td class="school-name">中央民族大学<span class="tag-985">985</span></td><td>自划线</td><td>285</td><td>280</td><td></td></tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">三、211院校 · 计算机相关专业复试分数线</div>
+        <table class="score-table">
+          <thead><tr><th>院校</th><th>类型</th><th>学硕复试线</th><th>专硕复试线</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td class="school-name">西安电子科技大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>320</td><td>315</td><td>计算机强校</td></tr>
+            <tr><td class="school-name">北京邮电大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>330</td><td>325</td><td>计算机强校</td></tr>
+            <tr><td class="school-name">南京航空航天大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>315</td><td>310</td><td></td></tr>
+            <tr><td class="school-name">南京理工大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>315</td><td>310</td><td></td></tr>
+            <tr><td class="school-name">武汉理工大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>310</td><td>305</td><td></td></tr>
+            <tr><td class="school-name">合肥工业大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>305</td><td>300</td><td></td></tr>
+            <tr><td class="school-name">北京交通大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>315</td><td>310</td><td></td></tr>
+            <tr><td class="school-name">西南交通大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>310</td><td>305</td><td></td></tr>
+            <tr><td class="school-name">北京科技大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>310</td><td>305</td><td></td></tr>
+            <tr><td class="school-name">华东理工大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>310</td><td>305</td><td></td></tr>
+            <tr><td class="school-name">上海大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>315</td><td>310</td><td></td></tr>
+            <tr><td class="school-name">东华大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>300</td><td>295</td><td></td></tr>
+            <tr><td class="school-name">江南大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>300</td><td>295</td><td></td></tr>
+            <tr><td class="school-name">河海大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>305</td><td>300</td><td></td></tr>
+            <tr><td class="school-name">中国矿业大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>295</td><td>290</td><td></td></tr>
+            <tr><td class="school-name">中国地质大学（武汉）<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>295</td><td>290</td><td></td></tr>
+            <tr><td class="school-name">华北电力大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>300</td><td>295</td><td></td></tr>
+            <tr><td class="school-name">北京工业大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>305</td><td>300</td><td></td></tr>
+            <tr><td class="school-name">哈尔滨工程大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>305</td><td>300</td><td></td></tr>
+            <tr><td class="school-name">苏州大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>310</td><td>305</td><td></td></tr>
+            <tr><td class="school-name">暨南大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>310</td><td>305</td><td></td></tr>
+            <tr><td class="school-name">华南师范大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>295</td><td>290</td><td></td></tr>
+            <tr><td class="school-name">安徽大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>295</td><td>290</td><td></td></tr>
+            <tr><td class="school-name">福州大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>300</td><td>295</td><td></td></tr>
+            <tr><td class="school-name">南昌大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>295</td><td>290</td><td></td></tr>
+            <tr><td class="school-name">郑州大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>300</td><td>295</td><td></td></tr>
+            <tr><td class="school-name">太原理工大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>290</td><td>285</td><td></td></tr>
+            <tr><td class="school-name">大连海事大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>290</td><td>285</td><td></td></tr>
+            <tr><td class="school-name">云南大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>285</td><td>280</td><td>B区高</td></tr>
+            <tr><td class="school-name">西南大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>295</td><td>290</td><td></td></tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">四、双一流 / 一本强校 · 计算机相关专业复试分数线</div>
+        <table class="score-table">
+          <thead><tr><th>院校</th><th>类型</th><th>学硕复试线</th><th>专硕复试线</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td class="school-name">深圳大学<span class="tag-shuang">双一流</span></td><td>国家线基础上自定</td><td>325</td><td>320</td><td>计算机强校</td></tr>
+            <tr><td class="school-name">南方科技大学<span class="tag-shuang">双一流</span></td><td>国家线基础上自定</td><td>325</td><td>320</td><td>科研新锐</td></tr>
+            <tr><td class="school-name">上海科技大学<span class="tag-shuang">双一流</span></td><td>国家线基础上自定</td><td>320</td><td>315</td><td>科研新锐</td></tr>
+            <tr><td class="school-name">南京邮电大学<span class="tag-shuang">双一流</span></td><td>国家线基础上自定</td><td>315</td><td>310</td><td>计算机强校</td></tr>
+            <tr><td class="school-name">南京信息工程大学<span class="tag-shuang">双一流</span></td><td>国家线</td><td>300</td><td>295</td><td></td></tr>
+            <tr><td class="school-name">山西大学<span class="tag-shuang">双一流</span></td><td>国家线</td><td>285</td><td>280</td><td></td></tr>
+            <tr><td class="school-name">湘潭大学<span class="tag-shuang">双一流</span></td><td>国家线</td><td>290</td><td>285</td><td></td></tr>
+            <tr><td class="school-name">杭州电子科技大学</td><td>国家线</td><td>305</td><td>300</td><td>一本，计算机强校</td></tr>
+            <tr><td class="school-name">重庆邮电大学</td><td>国家线</td><td>295</td><td>290</td><td>一本，计算机强校</td></tr>
+            <tr><td class="school-name">浙江工业大学</td><td>国家线</td><td>290</td><td>285</td><td>一本</td></tr>
+            <tr><td class="school-name">广东工业大学</td><td>国家线</td><td>295</td><td>290</td><td>一本</td></tr>
+            <tr><td class="school-name">上海理工大学</td><td>国家线</td><td>290</td><td>285</td><td>一本</td></tr>
+            <tr><td class="school-name">扬州大学</td><td>国家线</td><td>280</td><td>275</td><td>一本</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="y2024" class="modal-year-content" style="display:none;">
+        <div class="section-title">一、2024年国家线</div>
+        <table class="score-table">
+          <thead><tr><th>学科门类</th><th>类型</th><th>总分</th><th>政治/英语</th><th>数学/专业课</th></tr></thead>
+          <tbody>
+            <tr><td>工学（08）含计算机科学与技术0812</td><td>A区</td><td>273</td><td>37</td><td>56</td></tr>
+            <tr><td>工学（08）含计算机科学与技术0812</td><td>B区</td><td>263</td><td>34</td><td>51</td></tr>
+            <tr><td>理学（07）含计算机0775</td><td>A区</td><td>288</td><td>41</td><td>62</td></tr>
+            <tr><td>理学（07）含计算机0775</td><td>B区</td><td>278</td><td>38</td><td>57</td></tr>
+            <tr><td>电子信息（0854）专硕</td><td>A区</td><td>273</td><td>37</td><td>56</td></tr>
+            <tr><td>电子信息（0854）专硕</td><td>B区</td><td>263</td><td>34</td><td>51</td></tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">二、985院校 · 计算机科学与技术（学硕0812）/ 电子信息（专硕0854）复试分数线</div>
+        <table class="score-table">
+          <thead><tr><th>院校</th><th>类型</th><th>学硕复试线</th><th>专硕复试线</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td class="school-name">清华大学<span class="tag-985">985</span></td><td>自划线</td><td>350</td><td>345</td><td>实际院线更高</td></tr>
+            <tr><td class="school-name">北京大学<span class="tag-985">985</span></td><td>自划线</td><td>355</td><td>345</td><td>实际院线更高</td></tr>
+            <tr><td class="school-name">浙江大学<span class="tag-985">985</span></td><td>自划线</td><td>345</td><td>340</td><td></td></tr>
+            <tr><td class="school-name">上海交通大学<span class="tag-985">985</span></td><td>自划线</td><td>345</td><td>340</td><td></td></tr>
+            <tr><td class="school-name">复旦大学<span class="tag-985">985</span></td><td>自划线</td><td>340</td><td>335</td><td></td></tr>
+            <tr><td class="school-name">南京大学<span class="tag-985">985</span></td><td>自划线</td><td>340</td><td>335</td><td></td></tr>
+            <tr><td class="school-name">中国科学技术大学<span class="tag-985">985</span></td><td>自划线</td><td>340</td><td>335</td><td></td></tr>
+            <tr><td class="school-name">哈尔滨工业大学<span class="tag-985">985</span></td><td>自划线</td><td>330</td><td>325</td><td></td></tr>
+            <tr><td class="school-name">华中科技大学<span class="tag-985">985</span></td><td>自划线</td><td>335</td><td>330</td><td></td></tr>
+            <tr><td class="school-name">武汉大学<span class="tag-985">985</span></td><td>自划线</td><td>335</td><td>330</td><td></td></tr>
+            <tr><td class="school-name">北京航空航天大学<span class="tag-985">985</span></td><td>自划线</td><td>335</td><td>330</td><td></td></tr>
+            <tr><td class="school-name">北京理工大学<span class="tag-985">985</span></td><td>自划线</td><td>325</td><td>320</td><td></td></tr>
+            <tr><td class="school-name">电子科技大学<span class="tag-985">985</span></td><td>自划线</td><td>335</td><td>325</td><td>计算机强校</td></tr>
+            <tr><td class="school-name">西安交通大学<span class="tag-985">985</span></td><td>自划线</td><td>330</td><td>325</td><td></td></tr>
+            <tr><td class="school-name">同济大学<span class="tag-985">985</span></td><td>自划线</td><td>330</td><td>325</td><td></td></tr>
+            <tr><td class="school-name">东南大学<span class="tag-985">985</span></td><td>自划线</td><td>330</td><td>325</td><td></td></tr>
+            <tr><td class="school-name">天津大学<span class="tag-985">985</span></td><td>自划线</td><td>320</td><td>315</td><td></td></tr>
+            <tr><td class="school-name">南开大学<span class="tag-985">985</span></td><td>自划线</td><td>325</td><td>320</td><td></td></tr>
+            <tr><td class="school-name">中山大学<span class="tag-985">985</span></td><td>自划线</td><td>330</td><td>325</td><td></td></tr>
+            <tr><td class="school-name">华南理工大学<span class="tag-985">985</span></td><td>自划线</td><td>325</td><td>320</td><td></td></tr>
+            <tr><td class="school-name">厦门大学<span class="tag-985">985</span></td><td>自划线</td><td>325</td><td>320</td><td></td></tr>
+            <tr><td class="school-name">四川大学<span class="tag-985">985</span></td><td>自划线</td><td>325</td><td>315</td><td></td></tr>
+            <tr><td class="school-name">重庆大学<span class="tag-985">985</span></td><td>自划线</td><td>315</td><td>315</td><td></td></tr>
+            <tr><td class="school-name">湖南大学<span class="tag-985">985</span></td><td>自划线</td><td>320</td><td>315</td><td></td></tr>
+            <tr><td class="school-name">中南大学<span class="tag-985">985</span></td><td>自划线</td><td>320</td><td>315</td><td></td></tr>
+            <tr><td class="school-name">山东大学<span class="tag-985">985</span></td><td>自划线</td><td>320</td><td>315</td><td></td></tr>
+            <tr><td class="school-name">大连理工大学<span class="tag-985">985</span></td><td>自划线</td><td>320</td><td>315</td><td></td></tr>
+            <tr><td class="school-name">东北大学<span class="tag-985">985</span></td><td>自划线</td><td>315</td><td>310</td><td></td></tr>
+            <tr><td class="school-name">吉林大学<span class="tag-985">985</span></td><td>自划线</td><td>325</td><td>320</td><td></td></tr>
+            <tr><td class="school-name">兰州大学<span class="tag-985">985</span></td><td>自划线</td><td>305</td><td>300</td><td>B区高校</td></tr>
+            <tr><td class="school-name">西北工业大学<span class="tag-985">985</span></td><td>自划线</td><td>325</td><td>320</td><td>计算机强校</td></tr>
+            <tr><td class="school-name">国防科技大学<span class="tag-985">985</span></td><td>自划线</td><td>335</td><td>330</td><td>计算机A+</td></tr>
+            <tr><td class="school-name">华东师范大学<span class="tag-985">985</span></td><td>自划线</td><td>320</td><td>315</td><td></td></tr>
+            <tr><td class="school-name">北京师范大学<span class="tag-985">985</span></td><td>自划线</td><td>315</td><td>310</td><td></td></tr>
+            <tr><td class="school-name">中国农业大学<span class="tag-985">985</span></td><td>自划线</td><td>305</td><td>300</td><td></td></tr>
+            <tr><td class="school-name">西北农林科技大学<span class="tag-985">985</span></td><td>自划线</td><td>285</td><td>280</td><td></td></tr>
+            <tr><td class="school-name">中国人民大学<span class="tag-985">985</span></td><td>自划线</td><td>325</td><td>320</td><td>高瓴人工智能学院</td></tr>
+            <tr><td class="school-name">中央民族大学<span class="tag-985">985</span></td><td>自划线</td><td>280</td><td>275</td><td></td></tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">三、211院校 · 计算机相关专业复试分数线</div>
+        <table class="score-table">
+          <thead><tr><th>院校</th><th>类型</th><th>学硕复试线</th><th>专硕复试线</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td class="school-name">西安电子科技大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>315</td><td>310</td><td>计算机强校</td></tr>
+            <tr><td class="school-name">北京邮电大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>325</td><td>320</td><td>计算机强校</td></tr>
+            <tr><td class="school-name">南京航空航天大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>310</td><td>305</td><td></td></tr>
+            <tr><td class="school-name">南京理工大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>310</td><td>305</td><td></td></tr>
+            <tr><td class="school-name">武汉理工大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>305</td><td>300</td><td></td></tr>
+            <tr><td class="school-name">合肥工业大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>300</td><td>295</td><td></td></tr>
+            <tr><td class="school-name">北京交通大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>310</td><td>305</td><td></td></tr>
+            <tr><td class="school-name">西南交通大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>305</td><td>300</td><td></td></tr>
+            <tr><td class="school-name">北京科技大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>305</td><td>300</td><td></td></tr>
+            <tr><td class="school-name">华东理工大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>305</td><td>300</td><td></td></tr>
+            <tr><td class="school-name">上海大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>310</td><td>305</td><td></td></tr>
+            <tr><td class="school-name">东华大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>295</td><td>290</td><td></td></tr>
+            <tr><td class="school-name">江南大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>295</td><td>290</td><td></td></tr>
+            <tr><td class="school-name">河海大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>300</td><td>295</td><td></td></tr>
+            <tr><td class="school-name">中国矿业大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>290</td><td>285</td><td></td></tr>
+            <tr><td class="school-name">中国地质大学（武汉）<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>290</td><td>285</td><td></td></tr>
+            <tr><td class="school-name">华北电力大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>295</td><td>290</td><td></td></tr>
+            <tr><td class="school-name">北京工业大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>300</td><td>295</td><td></td></tr>
+            <tr><td class="school-name">哈尔滨工程大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>300</td><td>295</td><td></td></tr>
+            <tr><td class="school-name">苏州大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>305</td><td>300</td><td></td></tr>
+            <tr><td class="school-name">暨南大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>305</td><td>300</td><td></td></tr>
+            <tr><td class="school-name">华南师范大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>290</td><td>285</td><td></td></tr>
+            <tr><td class="school-name">安徽大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>290</td><td>285</td><td></td></tr>
+            <tr><td class="school-name">福州大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>295</td><td>290</td><td></td></tr>
+            <tr><td class="school-name">南昌大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>290</td><td>285</td><td></td></tr>
+            <tr><td class="school-name">郑州大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>295</td><td>290</td><td></td></tr>
+            <tr><td class="school-name">太原理工大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>285</td><td>280</td><td></td></tr>
+            <tr><td class="school-name">大连海事大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>285</td><td>280</td><td></td></tr>
+            <tr><td class="school-name">云南大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>280</td><td>275</td><td>B区高</td></tr>
+            <tr><td class="school-name">西南大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>290</td><td>285</td><td></td></tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">四、双一流 / 一本强校 · 计算机相关专业复试分数线</div>
+        <table class="score-table">
+          <thead><tr><th>院校</th><th>类型</th><th>学硕复试线</th><th>专硕复试线</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td class="school-name">深圳大学<span class="tag-shuang">双一流</span></td><td>国家线基础上自定</td><td>320</td><td>315</td><td>计算机强校</td></tr>
+            <tr><td class="school-name">南方科技大学<span class="tag-shuang">双一流</span></td><td>国家线基础上自定</td><td>320</td><td>315</td><td>科研新锐</td></tr>
+            <tr><td class="school-name">上海科技大学<span class="tag-shuang">双一流</span></td><td>国家线基础上自定</td><td>315</td><td>310</td><td>科研新锐</td></tr>
+            <tr><td class="school-name">南京邮电大学<span class="tag-shuang">双一流</span></td><td>国家线基础上自定</td><td>310</td><td>305</td><td>计算机强校</td></tr>
+            <tr><td class="school-name">南京信息工程大学<span class="tag-shuang">双一流</span></td><td>国家线</td><td>295</td><td>290</td><td></td></tr>
+            <tr><td class="school-name">山西大学<span class="tag-shuang">双一流</span></td><td>国家线</td><td>280</td><td>275</td><td></td></tr>
+            <tr><td class="school-name">湘潭大学<span class="tag-shuang">双一流</span></td><td>国家线</td><td>285</td><td>280</td><td></td></tr>
+            <tr><td class="school-name">杭州电子科技大学</td><td>国家线</td><td>300</td><td>295</td><td>一本，计算机强校</td></tr>
+            <tr><td class="school-name">重庆邮电大学</td><td>国家线</td><td>290</td><td>285</td><td>一本，计算机强校</td></tr>
+            <tr><td class="school-name">浙江工业大学</td><td>国家线</td><td>285</td><td>280</td><td>一本</td></tr>
+            <tr><td class="school-name">广东工业大学</td><td>国家线</td><td>290</td><td>285</td><td>一本</td></tr>
+            <tr><td class="school-name">上海理工大学</td><td>国家线</td><td>285</td><td>280</td><td>一本</td></tr>
+            <tr><td class="school-name">扬州大学</td><td>国家线</td><td>275</td><td>270</td><td>一本</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="y2023" class="modal-year-content" style="display:none;">
+        <div class="section-title">一、2023年国家线</div>
+        <table class="score-table">
+          <thead><tr><th>学科门类</th><th>类型</th><th>总分</th><th>政治/英语</th><th>数学/专业课</th></tr></thead>
+          <tbody>
+            <tr><td>工学（08）含计算机科学与技术0812</td><td>A区</td><td>273</td><td>38</td><td>57</td></tr>
+            <tr><td>工学（08）含计算机科学与技术0812</td><td>B区</td><td>263</td><td>35</td><td>53</td></tr>
+            <tr><td>理学（07）含计算机0775</td><td>A区</td><td>279</td><td>38</td><td>57</td></tr>
+            <tr><td>理学（07）含计算机0775</td><td>B区</td><td>269</td><td>35</td><td>53</td></tr>
+            <tr><td>电子信息（0854）专硕</td><td>A区</td><td>273</td><td>38</td><td>57</td></tr>
+            <tr><td>电子信息（0854）专硕</td><td>B区</td><td>263</td><td>35</td><td>53</td></tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">二、985院校 · 计算机科学与技术（学硕0812）/ 电子信息（专硕0854）复试分数线</div>
+        <table class="score-table">
+          <thead><tr><th>院校</th><th>类型</th><th>学硕复试线</th><th>专硕复试线</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td class="school-name">清华大学<span class="tag-985">985</span></td><td>自划线</td><td>355</td><td>350</td><td>实际院线更高</td></tr>
+            <tr><td class="school-name">北京大学<span class="tag-985">985</span></td><td>自划线</td><td>350</td><td>345</td><td>实际院线更高</td></tr>
+            <tr><td class="school-name">浙江大学<span class="tag-985">985</span></td><td>自划线</td><td>345</td><td>340</td><td></td></tr>
+            <tr><td class="school-name">上海交通大学<span class="tag-985">985</span></td><td>自划线</td><td>345</td><td>340</td><td></td></tr>
+            <tr><td class="school-name">复旦大学<span class="tag-985">985</span></td><td>自划线</td><td>340</td><td>335</td><td></td></tr>
+            <tr><td class="school-name">南京大学<span class="tag-985">985</span></td><td>自划线</td><td>340</td><td>335</td><td></td></tr>
+            <tr><td class="school-name">中国科学技术大学<span class="tag-985">985</span></td><td>自划线</td><td>340</td><td>335</td><td></td></tr>
+            <tr><td class="school-name">哈尔滨工业大学<span class="tag-985">985</span></td><td>自划线</td><td>330</td><td>325</td><td></td></tr>
+            <tr><td class="school-name">华中科技大学<span class="tag-985">985</span></td><td>自划线</td><td>340</td><td>335</td><td></td></tr>
+            <tr><td class="school-name">武汉大学<span class="tag-985">985</span></td><td>自划线</td><td>340</td><td>335</td><td></td></tr>
+            <tr><td class="school-name">北京航空航天大学<span class="tag-985">985</span></td><td>自划线</td><td>335</td><td>330</td><td></td></tr>
+            <tr><td class="school-name">北京理工大学<span class="tag-985">985</span></td><td>自划线</td><td>325</td><td>320</td><td></td></tr>
+            <tr><td class="school-name">电子科技大学<span class="tag-985">985</span></td><td>自划线</td><td>335</td><td>325</td><td>计算机强校</td></tr>
+            <tr><td class="school-name">西安交通大学<span class="tag-985">985</span></td><td>自划线</td><td>330</td><td>325</td><td></td></tr>
+            <tr><td class="school-name">同济大学<span class="tag-985">985</span></td><td>自划线</td><td>330</td><td>325</td><td></td></tr>
+            <tr><td class="school-name">东南大学<span class="tag-985">985</span></td><td>自划线</td><td>330</td><td>325</td><td></td></tr>
+            <tr><td class="school-name">天津大学<span class="tag-985">985</span></td><td>自划线</td><td>320</td><td>315</td><td></td></tr>
+            <tr><td class="school-name">南开大学<span class="tag-985">985</span></td><td>自划线</td><td>325</td><td>320</td><td></td></tr>
+            <tr><td class="school-name">中山大学<span class="tag-985">985</span></td><td>自划线</td><td>330</td><td>325</td><td></td></tr>
+            <tr><td class="school-name">华南理工大学<span class="tag-985">985</span></td><td>自划线</td><td>325</td><td>320</td><td></td></tr>
+            <tr><td class="school-name">厦门大学<span class="tag-985">985</span></td><td>自划线</td><td>325</td><td>320</td><td></td></tr>
+            <tr><td class="school-name">四川大学<span class="tag-985">985</span></td><td>自划线</td><td>325</td><td>315</td><td></td></tr>
+            <tr><td class="school-name">重庆大学<span class="tag-985">985</span></td><td>自划线</td><td>315</td><td>315</td><td></td></tr>
+            <tr><td class="school-name">湖南大学<span class="tag-985">985</span></td><td>自划线</td><td>320</td><td>315</td><td></td></tr>
+            <tr><td class="school-name">中南大学<span class="tag-985">985</span></td><td>自划线</td><td>320</td><td>315</td><td></td></tr>
+            <tr><td class="school-name">山东大学<span class="tag-985">985</span></td><td>自划线</td><td>320</td><td>315</td><td></td></tr>
+            <tr><td class="school-name">大连理工大学<span class="tag-985">985</span></td><td>自划线</td><td>320</td><td>315</td><td></td></tr>
+            <tr><td class="school-name">东北大学<span class="tag-985">985</span></td><td>自划线</td><td>315</td><td>310</td><td></td></tr>
+            <tr><td class="school-name">吉林大学<span class="tag-985">985</span></td><td>自划线</td><td>325</td><td>320</td><td></td></tr>
+            <tr><td class="school-name">兰州大学<span class="tag-985">985</span></td><td>自划线</td><td>305</td><td>300</td><td>B区高校</td></tr>
+            <tr><td class="school-name">西北工业大学<span class="tag-985">985</span></td><td>自划线</td><td>325</td><td>320</td><td>计算机强校</td></tr>
+            <tr><td class="school-name">国防科技大学<span class="tag-985">985</span></td><td>自划线</td><td>335</td><td>330</td><td>计算机A+</td></tr>
+            <tr><td class="school-name">华东师范大学<span class="tag-985">985</span></td><td>自划线</td><td>320</td><td>315</td><td></td></tr>
+            <tr><td class="school-name">北京师范大学<span class="tag-985">985</span></td><td>自划线</td><td>315</td><td>310</td><td></td></tr>
+            <tr><td class="school-name">中国农业大学<span class="tag-985">985</span></td><td>自划线</td><td>305</td><td>300</td><td></td></tr>
+            <tr><td class="school-name">西北农林科技大学<span class="tag-985">985</span></td><td>自划线</td><td>285</td><td>280</td><td></td></tr>
+            <tr><td class="school-name">中国人民大学<span class="tag-985">985</span></td><td>自划线</td><td>325</td><td>320</td><td>高瓴人工智能学院</td></tr>
+            <tr><td class="school-name">中央民族大学<span class="tag-985">985</span></td><td>自划线</td><td>280</td><td>275</td><td></td></tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">三、211院校 · 计算机相关专业复试分数线</div>
+        <table class="score-table">
+          <thead><tr><th>院校</th><th>类型</th><th>学硕复试线</th><th>专硕复试线</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td class="school-name">西安电子科技大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>315</td><td>310</td><td>计算机强校</td></tr>
+            <tr><td class="school-name">北京邮电大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>330</td><td>325</td><td>计算机强校</td></tr>
+            <tr><td class="school-name">南京航空航天大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>310</td><td>305</td><td></td></tr>
+            <tr><td class="school-name">南京理工大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>310</td><td>305</td><td></td></tr>
+            <tr><td class="school-name">武汉理工大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>305</td><td>300</td><td></td></tr>
+            <tr><td class="school-name">合肥工业大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>300</td><td>295</td><td></td></tr>
+            <tr><td class="school-name">北京交通大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>310</td><td>305</td><td></td></tr>
+            <tr><td class="school-name">西南交通大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>305</td><td>300</td><td></td></tr>
+            <tr><td class="school-name">北京科技大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>305</td><td>300</td><td></td></tr>
+            <tr><td class="school-name">华东理工大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>305</td><td>300</td><td></td></tr>
+            <tr><td class="school-name">上海大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>310</td><td>305</td><td></td></tr>
+            <tr><td class="school-name">东华大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>295</td><td>290</td><td></td></tr>
+            <tr><td class="school-name">江南大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>295</td><td>290</td><td></td></tr>
+            <tr><td class="school-name">河海大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>300</td><td>295</td><td></td></tr>
+            <tr><td class="school-name">中国矿业大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>290</td><td>285</td><td></td></tr>
+            <tr><td class="school-name">中国地质大学（武汉）<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>290</td><td>285</td><td></td></tr>
+            <tr><td class="school-name">华北电力大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>295</td><td>290</td><td></td></tr>
+            <tr><td class="school-name">北京工业大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>300</td><td>295</td><td></td></tr>
+            <tr><td class="school-name">哈尔滨工程大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>300</td><td>295</td><td></td></tr>
+            <tr><td class="school-name">苏州大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>305</td><td>300</td><td></td></tr>
+            <tr><td class="school-name">暨南大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>305</td><td>300</td><td></td></tr>
+            <tr><td class="school-name">华南师范大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>290</td><td>285</td><td></td></tr>
+            <tr><td class="school-name">安徽大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>290</td><td>285</td><td></td></tr>
+            <tr><td class="school-name">福州大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>295</td><td>290</td><td></td></tr>
+            <tr><td class="school-name">南昌大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>290</td><td>285</td><td></td></tr>
+            <tr><td class="school-name">郑州大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>295</td><td>290</td><td></td></tr>
+            <tr><td class="school-name">太原理工大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>285</td><td>280</td><td></td></tr>
+            <tr><td class="school-name">大连海事大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>285</td><td>280</td><td></td></tr>
+            <tr><td class="school-name">云南大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>280</td><td>275</td><td>B区高</td></tr>
+            <tr><td class="school-name">西南大学<span class="tag-211">211</span></td><td>国家线基础上自定</td><td>290</td><td>285</td><td></td></tr>
+          </tbody>
+        </table>
+
+        <div class="section-title">四、双一流 / 一本强校 · 计算机相关专业复试分数线</div>
+        <table class="score-table">
+          <thead><tr><th>院校</th><th>类型</th><th>学硕复试线</th><th>专硕复试线</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td class="school-name">深圳大学<span class="tag-shuang">双一流</span></td><td>国家线基础上自定</td><td>320</td><td>315</td><td>计算机强校</td></tr>
+            <tr><td class="school-name">南方科技大学<span class="tag-shuang">双一流</span></td><td>国家线基础上自定</td><td>320</td><td>315</td><td>科研新锐</td></tr>
+            <tr><td class="school-name">上海科技大学<span class="tag-shuang">双一流</span></td><td>国家线基础上自定</td><td>315</td><td>310</td><td>科研新锐</td></tr>
+            <tr><td class="school-name">南京邮电大学<span class="tag-shuang">双一流</span></td><td>国家线基础上自定</td><td>310</td><td>305</td><td>计算机强校</td></tr>
+            <tr><td class="school-name">南京信息工程大学<span class="tag-shuang">双一流</span></td><td>国家线</td><td>295</td><td>290</td><td></td></tr>
+            <tr><td class="school-name">山西大学<span class="tag-shuang">双一流</span></td><td>国家线</td><td>280</td><td>275</td><td></td></tr>
+            <tr><td class="school-name">湘潭大学<span class="tag-shuang">双一流</span></td><td>国家线</td><td>285</td><td>280</td><td></td></tr>
+            <tr><td class="school-name">杭州电子科技大学</td><td>国家线</td><td>300</td><td>295</td><td>一本，计算机强校</td></tr>
+            <tr><td class="school-name">重庆邮电大学</td><td>国家线</td><td>290</td><td>285</td><td>一本，计算机强校</td></tr>
+            <tr><td class="school-name">浙江工业大学</td><td>国家线</td><td>285</td><td>280</td><td>一本</td></tr>
+            <tr><td class="school-name">广东工业大学</td><td>国家线</td><td>290</td><td>285</td><td>一本</td></tr>
+            <tr><td class="school-name">上海理工大学</td><td>国家线</td><td>285</td><td>280</td><td>一本</td></tr>
+            <tr><td class="school-name">扬州大学</td><td>国家线</td><td>275</td><td>270</td><td>一本</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="note">⚠️ 说明：① 以上分数线为各校计算机相关专业复试基本线（校线），实际录取线（院线/专业线）可能更高，具体请查询各校研究生院官网。② 国家线数据来自教育部官方发布，院校线数据供参考，以各校官方公布为准。③ B区高校总分线比A区低10分左右，单科线低3分左右。</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  考研完全指南 — 仅供参考，具体信息请以<a href="https://yz.chsi.com.cn" target="_blank" rel="noopener">研招网</a>及各院校官方通知为准
+</footer>
+
+<script>
+  // 分数线弹窗
+  function openModal() {
+    document.getElementById('scoreModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('scoreModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('scoreModal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // 年份切换
+  function switchYear(yearId, btn) {
+    document.querySelectorAll('.modal-year-content').forEach(c => c.style.display = 'none');
+    document.querySelectorAll('.modal-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(yearId).style.display = '';
+    btn.classList.add('active');
+  }
+
+  // Tab切换
+  function switchTab(name) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    document.querySelector(`.tab[onclick*="${name}"]`).classList.add('active');
+    document.getElementById(name).classList.add('active');
+  }
+
+  // 考研倒计时（每年12月倒数第二个周六，近似为12月20日）
+  function updateCountdown() {
+    const now = new Date();
+    const year = now.getMonth() >= 11 && now.getDate() > 22 ? now.getFullYear() + 1 : now.getFullYear();
+    // 目标日期：12月20日（近似每年初试日期）
+    const examDate = new Date(year, 11, 20); // 12月20日
+    if (now > examDate) {
+      examDate.setFullYear(year + 1);
+    }
+    const diff = Math.ceil((examDate - now) / (1000 * 60 * 60 * 24));
+    document.getElementById('countdown-days').textContent = diff + ' 天';
+  }
+  updateCountdown();
+
+  // 平滑滚动
+  document.querySelectorAll('.navbar a').forEach(a => {
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.querySelectorAll('.navbar a').forEach(x => x.classList.remove('active'));
+        this.classList.add('active');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
